@@ -342,3 +342,5 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+obj/Debug/netcoreapp3.0/Ctci.csprojAssemblyReference.cache
+obj/Debug/netcoreapp3.0/Ctci.csproj.CoreCompileInputs.cache
