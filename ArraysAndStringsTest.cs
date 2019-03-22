@@ -11,6 +11,7 @@ namespace Ctci
             arraysAndStrings = new ArraysAndStrings();
         }
 
+        // 1.1
         [Theory]
         [InlineData("abcd", true)]
         [InlineData("Ragnar", false)]
@@ -21,6 +22,7 @@ namespace Ctci
             Assert.Equal(expected, actual);
         }
 
+        // 1.2
         [Theory]
         [InlineData("abc", "bca", true)]
         [InlineData("racecar", "aaccerr", true)]
@@ -28,6 +30,18 @@ namespace Ctci
         public void CheckPermutationTheory(string first, string second, bool expected){
             var actual = arraysAndStrings.CheckPermutation(first, second);
 
+            Assert.Equal(expected, actual);
+        }
+
+        // 1.3
+        [Theory]
+        [InlineData("Mr John Smith    ", 13, "Mr%20John%20Smith")]
+        public void URLifyTest(string sentence, int length, string expected){
+            char[] input = sentence.ToCharArray();
+            arraysAndStrings.URLify(input, length);
+
+            string actual = String.Join("", input);
+            
             Assert.Equal(expected, actual);
         }
     }

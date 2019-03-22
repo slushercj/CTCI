@@ -29,7 +29,7 @@ public class ArraysAndStrings
         foreach(var c in second){
             if(!char.IsLetter(c))
                 continue;
-                
+
             int index = char.ToLower(c) - 'a';
             freq[index]--;
 
@@ -43,5 +43,35 @@ public class ArraysAndStrings
         }
 
         return true;
+    }
+
+    internal void URLify(char[] input, int length)
+    {
+        int spaces = countSpaces(input, length);
+
+        for(var i = length - 1; i >= 0; i--){
+            char current = input[i];
+
+            if(current == ' '){
+                spaces--;
+                input[i + 2 * spaces] = '%';
+                input[i + 2 * spaces + 1] = '2';
+                input[i + 2 * spaces + 2] = '0';
+            }
+            else{
+                input[i + 2 * spaces] = input[i];
+            }
+        }
+    }
+
+    private int countSpaces(char[] input, int length)
+    {
+        int spaces = 0;
+        for(int i = 0; i < length; i++){
+            if(input[i] == ' ')
+                spaces++;
+        }
+
+        return spaces;
     }
 }
