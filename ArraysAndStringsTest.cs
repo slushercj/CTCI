@@ -14,11 +14,21 @@ namespace Ctci
         [Theory]
         [InlineData("abcd", true)]
         [InlineData("Ragnar", false)]
-        public void Test1(string test, bool expected)
+        public void IsUniqueTheory(string test, bool expected)
         {
             var actual = arraysAndStrings.IsUnique(test);
 
-            Assert.Equal(actual, expected);
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData("abc", "bca", true)]
+        [InlineData("racecar", "aaccerr", true)]
+        [InlineData("Game of Thrones", "Vikings", false)]
+        public void CheckPermutationTheory(string first, string second, bool expected){
+            var actual = arraysAndStrings.CheckPermutation(first, second);
+
+            Assert.Equal(expected, actual);
         }
     }
 }
