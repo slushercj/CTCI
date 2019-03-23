@@ -83,7 +83,7 @@ public class ArraysAndStrings
 
             if(!char.IsLetter(permutation[i]))
                 continue;
-                
+
             freqCount[char.ToLower(permutation[i]) - 'a']++;
         }
 
@@ -94,6 +94,56 @@ public class ArraysAndStrings
 
             if(numOdds > 1)
                 return false;
+        }
+
+        return true;
+    }
+
+    internal bool OneAway(string first, string second)
+    {
+        if(first == second)
+            return true;
+        
+        return first.Length == second.Length ? IsOneReplacementAway(first, second) : IsOneInsertionAway(first, second);
+    }
+
+    private bool IsOneInsertionAway(string first, string second)
+    {
+        if(first.Length > second.Length)
+        {
+            string temp = first;
+            first = second;
+            second = temp;
+        }
+
+        for(int i = 0; i < first.Length; i++){
+            if(first[i] != second[i])
+            {
+                string newFirst = first.Insert(i, second[i].ToString());
+
+                if(newFirst != second){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsOneReplacementAway(string first, string second)
+    {
+        for(int i = 0; i < first.Length; i++)
+        {
+            if(first[i] != second[i])
+            {
+                if(first.Remove(i, 1) == second.Remove(i, 1))
+                    return true;
+                else
+                    return false;
+            }
         }
 
         return true;

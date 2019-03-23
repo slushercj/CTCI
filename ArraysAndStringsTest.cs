@@ -55,6 +55,18 @@ namespace Ctci
 
             Assert.Equal(expected, actual);
         }
+
+        // 1.5
+        [Theory]
+        [InlineData("pale", "ple", true)]
+        [InlineData("pales", "pale", true)]
+        [InlineData("pale", "bale", true)]
+        [InlineData("pale", "bake", false)]
+        public void OneAwayTest(string first, string second, bool expected){
+            bool actual = arraysAndStrings.OneAway(first, second);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
 
