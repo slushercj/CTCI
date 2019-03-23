@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 public class ArraysAndStrings
 {
@@ -47,7 +48,7 @@ public class ArraysAndStrings
 
     internal void URLify(char[] input, int length)
     {
-        int spaces = countSpaces(input, length);
+        int spaces = CountSpaces(input, length);
 
         for(var i = length - 1; i >= 0; i--){
             char current = input[i];
@@ -64,7 +65,7 @@ public class ArraysAndStrings
         }
     }
 
-    private int countSpaces(char[] input, int length)
+    private int CountSpaces(char[] input, int length)
     {
         int spaces = 0;
         for(int i = 0; i < length; i++){
@@ -105,6 +106,23 @@ public class ArraysAndStrings
             return true;
         
         return first.Length == second.Length ? IsOneReplacementAway(first, second) : IsOneInsertionAway(first, second);
+    }
+
+    internal string StringCompression(string input)
+    {
+        string compressedString = "";
+
+        for(int i = 0; i < input.Length; i++)
+        {
+            int j;
+            for(j = 0; i + j < input.Length && input[i + j] == input[i]; j++);
+
+            compressedString += input[i] + j;
+
+            i = j;
+        }
+
+        return compressedString.Length >= input.Length ? input : compressedString;
     }
 
     private bool IsOneInsertionAway(string first, string second)

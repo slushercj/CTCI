@@ -67,6 +67,17 @@ namespace Ctci
 
             Assert.Equal(expected, actual);
         }
+
+        // 1.6
+        [Theory]
+        [InlineData("aabcccccaaa", "a2b1c5a3")]
+        [InlineData("care", "care")]
+        public void StringCompressionTest(string input, string expected){
+            string actual = arraysAndStrings.StringCompression(input);
+
+            Assert.Equal(expected, actual);
+        }
+
     }
 }
 
