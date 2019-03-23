@@ -44,6 +44,17 @@ namespace Ctci
             
             Assert.Equal(expected, actual);
         }
+
+        // 1.4
+        [Theory]
+        [InlineData("Tact Coa", true)]
+        [InlineData("racecar", true)]
+        [InlineData("Targaryan", false)]
+        public void PalindromePermutationTest(string permutation, bool expected){
+            bool actual = arraysAndStrings.PalindromePermutation(permutation);
+
+            Assert.Equal(expected, actual);
+        }
     }
 }
 

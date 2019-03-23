@@ -74,4 +74,28 @@ public class ArraysAndStrings
 
         return spaces;
     }
+
+    internal bool PalindromePermutation(string permutation)
+    {
+        int[] freqCount = new int[26];
+
+        for(int i = 0; i < permutation.Length; i++){
+
+            if(!char.IsLetter(permutation[i]))
+                continue;
+                
+            freqCount[char.ToLower(permutation[i]) - 'a']++;
+        }
+
+        int numOdds = 0;
+        for(int i = 0; i < freqCount.Length; i++){
+            if(freqCount[i] % 2 != 0)
+                numOdds++;
+
+            if(numOdds > 1)
+                return false;
+        }
+
+        return true;
+    }
 }
