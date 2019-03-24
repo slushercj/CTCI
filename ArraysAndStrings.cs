@@ -110,19 +110,23 @@ public class ArraysAndStrings
 
     internal string StringCompression(string input)
     {
-        string compressedString = "";
+        var compressedString = new StringBuilder();
 
-        for(int i = 0; i < input.Length; i++)
-        {
-            int j;
-            for(j = 0; i + j < input.Length && input[i + j] == input[i]; j++);
+        var i = 0;
+        while(i < input.Length){
+            var currentChar = input[i];
 
-            compressedString += input[i].ToString() + j;
+            int count;
+            for(count = 0; i + count < input.Length && input[i + count] == currentChar; count++);
+            compressedString.Append($"{currentChar}{count}");
 
-            i += j - 1;
+            i = i + count;
         }
 
-        return compressedString.Length >= input.Length ? input : compressedString;
+        if(compressedString.Length >= input.Length)
+            return input;
+        
+        return compressedString.ToString();
     }
 
     private bool IsOneInsertionAway(string first, string second)
