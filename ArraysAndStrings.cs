@@ -117,9 +117,9 @@ public class ArraysAndStrings
             int j;
             for(j = 0; i + j < input.Length && input[i + j] == input[i]; j++);
 
-            compressedString += input[i] + j;
+            compressedString += input[i].ToString() + j;
 
-            i = j;
+            i += j - 1;
         }
 
         return compressedString.Length >= input.Length ? input : compressedString;
