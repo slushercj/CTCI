@@ -12,7 +12,7 @@ namespace Ctci
         }
 
         // 1.6
-        [Theory]
+        [Theory(Timeout = 50)]
         [InlineData("aabcccccaaa", "a2b1c5a3")]
         [InlineData("care", "care")]
         public void StringCompressionTest(string input, string expected){
@@ -22,7 +22,7 @@ namespace Ctci
         }
 
         // 1.5
-        [Theory]
+        [Theory(Timeout = 50)]
         [InlineData("pale", "ple", true)]
         [InlineData("pales", "pale", true)]
         [InlineData("pale", "bale", true)]
@@ -34,7 +34,7 @@ namespace Ctci
         }
 
         // 1.4
-        [Theory]
+        [Theory(Timeout = 50)]
         [InlineData("Tact Coa", true)]
         [InlineData("racecar", true)]
         [InlineData("Targaryan", false)]
@@ -45,7 +45,7 @@ namespace Ctci
         }
 
         // 1.3
-        [Theory]
+        [Theory(Timeout = 50)]
         [InlineData("Mr John Smith    ", 13, "Mr%20John%20Smith")]
         public void URLifyTest(string sentence, int length, string expected){
             char[] input = sentence.ToCharArray();
@@ -57,7 +57,7 @@ namespace Ctci
         }
 
         // 1.2
-        [Theory]
+        [Theory(Timeout = 50)]
         [InlineData("abc", "bca", true)]
         [InlineData("racecar", "aaccerr", true)]
         [InlineData("Game of Thrones", "Vikings", false)]
