@@ -24,7 +24,25 @@ namespace Ctci
     public class ArraysAndStringsTest
     {
         ArraysAndStrings arraysAndStrings;
-        public static IEnumerable<object[]> MatrixData => new List<object[]> {
+        public static IEnumerable<object[]> ZeroMatrixData => new List<object[]> {
+            new object[] {  // Each object is a matrix to be tested
+                new int[,]  // one instance of a matrix
+                {
+                    {1, 2, 3},
+                    {0, 5, 6},
+                    {7, 8, 0},
+                    {11, 12, 13}
+                },
+                new int[,]
+                {
+                    {0, 2, 0},
+                    {0, 0, 0},
+                    {0, 0, 0},
+                    {0, 12, 0}
+                }
+            }
+        };
+        public static IEnumerable<object[]> RotateMatrixData => new List<object[]> {
             new object[] {  // Each object is a matrix to be tested
                 new int[,]  // one instance of a matrix
                 {
@@ -46,9 +64,21 @@ namespace Ctci
             arraysAndStrings = new ArraysAndStrings();
         }
 
+        // 1.8
+        [Theory(Timeout = 50)]
+        [MemberData(nameof(ZeroMatrixData))]
+        public void ZeroMatrixTest(int[,] matrix, int[,] expected)
+        {
+            var actual = arraysAndStrings.ZeroMatrix(matrix);
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                    Assert.True(actual[i,j] == expected[i,j]);
+        }
+
         // 1.7
         [Theory(Timeout = 50)]
-        [MemberData(nameof(MatrixData))]
+        [MemberData(nameof(ZeroMatrixData))]
         public void RotateMatrix(int[,] matrix, int[,] expected)
         {
             var actual = arraysAndStrings.RotateMatrix(matrix);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 public class ArraysAndStrings
@@ -111,6 +112,28 @@ public class ArraysAndStrings
         }
 
         return true;
+    }
+
+    internal int[,] ZeroMatrix(int[,] matrix)
+    {
+        var zeroedColumns = new HashSet<int>();
+        var zeroedRows = new HashSet<int>();
+
+        for(var i = 0; i < matrix.GetLength(0); i++)
+            for(var j = 0; j < matrix.GetLength(1); j++)
+            {
+                if(matrix[i,j] == 0){
+                    zeroedRows.Add(i);
+                    zeroedColumns.Add(j);
+                }
+            }
+        
+        for(var i = 0; i < matrix.GetLength(0); i++)
+            for(var j = 0; j < matrix.GetLength(1); j++)
+                if(zeroedRows.Contains(i) || zeroedColumns.Contains(j))
+                    matrix[i,j] = 0;
+
+        return matrix;
     }
 
     internal bool OneAway(string first, string second)
