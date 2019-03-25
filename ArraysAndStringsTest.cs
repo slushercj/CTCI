@@ -1,21 +1,74 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Ctci
 {
+    public class TestDataGenerator : IEnumerable<object[,]>
+    {
+        private readonly List<object[,]> _data = new List<object[,]>
+            {
+                new object[,] {
+                    {5, 1, 3},
+                    {5, 1, 3},
+                    {5, 1, 3}
+                }
+            };
+
+        public IEnumerator<object[,]> GetEnumerator() => _data.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
     public class ArraysAndStringsTest
     {
         ArraysAndStrings arraysAndStrings;
+        public static IEnumerable<object[]> MatrixData => new List<object[]> {
+            new object[] {  // Each object is a matrix to be tested
+                new int[,]  // one instance of a matrix
+                {
+                    {1, 2, 3},
+                    {4, 5, 6},
+                    {7, 8, 9}
+                },
+                new int[,]
+                {
+                    {7, 4, 1},
+                    {8, 5, 2},
+                    {9, 6, 3}
+                }
+            }
+        };
 
-        public ArraysAndStringsTest(){
+        public ArraysAndStringsTest()
+        {
             arraysAndStrings = new ArraysAndStrings();
+        }
+
+        // 1.7
+        [Theory(Timeout = 50)]
+        [MemberData(nameof(MatrixData))]
+        public void RotateMatrix(int[,] matrix, int[,] expected)
+        {
+            var actual = arraysAndStrings.RotateMatrix(matrix);
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    // TODO
+                    //Assert.True(actual[i,j] == expected[i,j]);
+                }
+            }
         }
 
         // 1.6
         [Theory(Timeout = 50)]
         [InlineData("aabcccccaaa", "a2b1c5a3")]
         [InlineData("care", "care")]
-        public void StringCompressionTest(string input, string expected){
+        public void StringCompressionTest(string input, string expected)
+        {
             string actual = arraysAndStrings.StringCompression(input);
 
             Assert.Equal(expected, actual);
@@ -27,7 +80,8 @@ namespace Ctci
         [InlineData("pales", "pale", true)]
         [InlineData("pale", "bale", true)]
         [InlineData("pale", "bake", false)]
-        public void OneAwayTest(string first, string second, bool expected){
+        public void OneAwayTest(string first, string second, bool expected)
+        {
             bool actual = arraysAndStrings.OneAway(first, second);
 
             Assert.Equal(expected, actual);
@@ -38,7 +92,8 @@ namespace Ctci
         [InlineData("Tact Coa", true)]
         [InlineData("racecar", true)]
         [InlineData("Targaryan", false)]
-        public void PalindromePermutationTest(string permutation, bool expected){
+        public void PalindromePermutationTest(string permutation, bool expected)
+        {
             bool actual = arraysAndStrings.PalindromePermutation(permutation);
 
             Assert.Equal(expected, actual);
@@ -47,12 +102,13 @@ namespace Ctci
         // 1.3
         [Theory(Timeout = 50)]
         [InlineData("Mr John Smith    ", 13, "Mr%20John%20Smith")]
-        public void URLifyTest(string sentence, int length, string expected){
+        public void URLifyTest(string sentence, int length, string expected)
+        {
             char[] input = sentence.ToCharArray();
             arraysAndStrings.URLify(input, length);
 
             string actual = String.Join("", input);
-            
+
             Assert.Equal(expected, actual);
         }
 
@@ -61,7 +117,8 @@ namespace Ctci
         [InlineData("abc", "bca", true)]
         [InlineData("racecar", "aaccerr", true)]
         [InlineData("Game of Thrones", "Vikings", false)]
-        public void CheckPermutationTheory(string first, string second, bool expected){
+        public void CheckPermutationTheory(string first, string second, bool expected)
+        {
             var actual = arraysAndStrings.CheckPermutation(first, second);
 
             Assert.Equal(expected, actual);
@@ -78,5 +135,6 @@ namespace Ctci
             Assert.Equal(expected, actual);
         }
     }
+
 }
 
