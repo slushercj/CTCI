@@ -64,6 +64,17 @@ namespace Ctci
             arraysAndStrings = new ArraysAndStrings();
         }
 
+        // 1.9
+        [Theory(Timeout = 50)]
+        [InlineData("waterbottle", "erbottlewat", true)]
+        [InlineData("black", "mirror", false)]
+        public void StringRotationTest(string first, string second, bool expected)
+        {
+            var actual = arraysAndStrings.StringRotation(first, second);
+
+            Assert.Equal(expected, actual);
+        }
+
         // 1.8
         [Theory(Timeout = 50)]
         [MemberData(nameof(ZeroMatrixData))]

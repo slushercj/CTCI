@@ -114,6 +114,11 @@ public class ArraysAndStrings
         return true;
     }
 
+    internal object StringRotation(string first, string second)
+    {
+        return (second + second).Contains(first);
+    }
+
     internal int[,] ZeroMatrix(int[,] matrix)
     {
         var zeroedColumns = new HashSet<int>();
